@@ -32,24 +32,6 @@
         });
         console.log(b);
 
-        // hàm some (Kiểm tra xem ít nhất một phần tử của mảng có thỏa mãn điều kiện hay không)
-        testSome = [1, 2, 3, 4].some(num => num > 3)
-        console.log(testSome)
-        // rewrite
-        Array.prototype.somefn = function (callback) {
-            for (let i = 0; i < this.length; i++) {
-                if (i in this && callback(this[i], i, this)) {
-                    return true;
-                }
-            }
-            return false;
-        };
-        // Sử dụng
-        var hasEven = numbers.somefn(function (element) {
-            return element % 2 === 0; // Kiểm tra có số chẵn không
-        });
-        console.log(hasEven); // true
-
         // hàm every (Kiểm tra xem tất cả các phần tử của mảng có thỏa mãn điều kiện hay không.)
         testEvery = [1, 2, 3, 4].every(num => num > 3)
         console.log(testEvery)

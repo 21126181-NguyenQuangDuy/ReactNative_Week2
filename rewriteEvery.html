@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+</head>
+
+<body>
+    <script>
+        // hàm every (Kiểm tra xem tất cả các phần tử của mảng có thỏa mãn điều kiện hay không.)
+        testEvery = [1, 2, 3, 4].every(num => num > 3)
+        console.log(testEvery)
+        // rewrite every
+        Array.prototype.everyfn = function (callback) {
+            for (let i = 0; i < this.length; i++) {
+                if (i in this && !callback(this[i], i, this)) {
+                    return false;
+                }
+            }
+            return true;
+        };
+        // Sử dụng
+        var numbers = [1,2,3,4]
+        var allPositive = numbers.everyfn(function (element) {
+            return element > 3; // Kiểm tra tất cả đều dương
+        });
+        console.log(allPositive); // true
+    </script>
+</body>
+
+</html>
