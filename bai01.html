@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+</head>
+<body>
+    <script>
+        calcAverage = (score1,score2,score3)=> (score1+score2+score3)/3
+
+        Dolphin1= [44,23,71]
+        Koala1 = [65,54,49]
+
+        Dolphin2= [85,54,41]
+        Koala2 = [23,34,27]
+
+        avgDolphin1 = calcAverage(...Dolphin1)
+        avgDolphin2 = calcAverage(...Dolphin2)
+        avgKoala1 = calcAverage(...Koala1)
+        avgKoala2 = calcAverage(...Koala2)
+
+        checkWinner = (avgDolphins,avgKoalas) => {
+            if(avgDolphins>= 2*avgKoalas){
+                console.log("Dolphins win ("+avgDolphins+" vs "+avgKoalas+")")
+            }else if(avgKoalas>=2*avgDolphins){
+                console.log("Koalas win ("+avgKoalas+" vs "+avgDolphins+")")
+            }
+        }
+
+        checkWinner(avgDolphin1,avgKoala1)
+        checkWinner(avgDolphin2,avgKoala2)
+
+    </script>
+</body>
+</html>
