@@ -32,22 +32,6 @@
         });
         console.log(b);
 
-        // hàm forEach
-        testForeach = [1, 2, 3, 4].forEach(num => console.log(num))
-        // rewrite forEach
-        Array.prototype.forEachfn = function (callback) {
-            for (let i = 0; i < this.length; i++) {
-                if (i in this) {
-                    callback(this[i], i, this);
-                }
-            }
-        };
-        // Sử dụng
-        numbers.forEachfn(function (element) {
-            console.log(element * 2); // In ra từng phần tử nhân đôi
-        });
-
-
         // hàm some (Kiểm tra xem ít nhất một phần tử của mảng có thỏa mãn điều kiện hay không)
         testSome = [1, 2, 3, 4].some(num => num > 3)
         console.log(testSome)
