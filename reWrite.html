@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+</head>
+
+<body>
+    <script>
+        // hàm map
+        testMap = [1, 2, 3, 4].map(num => num * num)
+        console.log(testMap)
+        // rewrite hàm map
+        Array.prototype.mapfn = function (callback) {
+            let result = [];
+            for (let i = 0; i < this.length; i++) {
+                // Kiểm tra xem phần tử có phải là một phần tử hợp lệ không
+                if (i in this) {
+                    result.push(callback(this[i], i, this));
+                }
+            }
+            return result;
+        };
+        // Sử dụng hàm mapfn
+        var b = [3, 4, 5].mapfn(function (element) {
+            return element * 2;
+        });
+        console.log(b);
+
+
+        // hàm filter lọc mảng theo điều kiện
+        testFilter = [1, 2, 3, 4].filter(num => num % 2 == 0)
+        console.log(testFilter)
+        // rewrite hàm filter
+        Array.prototype.filterfn = function (callback) {
+            let result = [];
+            for (let i = 0; i < this.length; i++) {
+                if (i in this && callback(this[i], i, this)) {
+                    result.push(this[i]);
+                }
+            }
+            return result;
+        };
+        // Sử dụng
+        var numbers = [1, 2, 3, 4, 5];
+        var evenNumbers = numbers.filterfn(function (element) {
+            return element % 2 === 0; // Lọc số chẵn
+        });
+        console.log(evenNumbers); // [2, 4]
+
+
+        // hàm reduce (cộng với giá trị tích lũy là acc, khởi đầu là 2, cộng tổng lại là 12)
+        testReduce = [1, 2, 3, 4].reduce((acc, num) => acc + num, 2)
+        console.log(testReduce)
+        // rewrite
+        Array.prototype.reducefn = function (callback, initialValue) {
+            let accumulator = initialValue !== undefined ? initialValue : this[0]; //nếu acc có giá trị thì lấy giá trị đó nếu không thì giá trị vị trí 0
+            let startIndex = initialValue !== undefined ? 0 : 1; //nếu acc không có giá trị thì bắt đầu từ vị trí 0, nếu có thì acc là vị trí 0 và bắt dầu tieps theo từ vị trí 1 
+
+            for (let i = startIndex; i < this.length; i++) {
+                if (i in this) {
+                    accumulator = callback(accumulator, this[i], i, this); // gán giá trị vào lại acc
+                }
+            }
+            return accumulator;
+        };
+        // Sử dụng
+        var sum = numbers.reducefn(function (acc, element) {
+            return acc + element; // Tính tổng
+        }, 0);
+        console.log(sum); // 15
+
+
+        // hàm forEach
+        testForeach = [1, 2, 3, 4].forEach(num => console.log(num))
+        // rewrite forEach
+        Array.prototype.forEachfn = function (callback) {
+            for (let i = 0; i < this.length; i++) {
+                if (i in this) {
+                    callback(this[i], i, this);
+                }
+            }
+        };
+        // Sử dụng
+        numbers.forEachfn(function (element) {
+            console.log(element * 2); // In ra từng phần tử nhân đôi
+        });
+
+
+        // hàm some (Kiểm tra xem ít nhất một phần tử của mảng có thỏa mãn điều kiện hay không)
+        testSome = [1, 2, 3, 4].some(num => num > 3)
+        console.log(testSome)
+        // rewrite
+        Array.prototype.somefn = function (callback) {
+            for (let i = 0; i < this.length; i++) {
+                if (i in this && callback(this[i], i, this)) {
+                    return true;
+                }
+            }
+            return false;
+        };
+        // Sử dụng
+        var hasEven = numbers.somefn(function (element) {
+            return element % 2 === 0; // Kiểm tra có số chẵn không
+        });
+        console.log(hasEven); // true
+
+        // hàm every (Kiểm tra xem tất cả các phần tử của mảng có thỏa mãn điều kiện hay không.)
+        testEvery = [1, 2, 3, 4].every(num => num > 3)
+        console.log(testEvery)
+        // rewrite every
+        Array.prototype.everyfn = function (callback) {
+            for (let i = 0; i < this.length; i++) {
+                if (i in this && !callback(this[i], i, this)) {
+                    return false;
+                }
+            }
+            return true;
+        };
+        // Sử dụng
+        var allPositive = numbers.everyfn(function (element) {
+            return element > 0; // Kiểm tra tất cả đều dương
+        });
+        console.log(allPositive); // true
+
+
+
+        // hàm find (tìm và trả về phần tử dầu tiên thỏa mãn điều kiện )
+        testFind = [1, 2, 3, 4].find(num => num > 1)
+        console.log(testFind)
+
+        // Hàm findIndex (tìm và tar về chỉ số của phần tử đầu tiên thỏa mãn điều kiện)
+        testIndex = [1, 2, 3, 4].findIndex(num => num > 1)
+        console.log(testIndex)
+
+        // hàm includes (kiểm tra xem mảng có chứa giá trị nào không)
+        testIncludes = [1, 2, 3, 4].includes(2)
+        console.log(testIncludes)
+
+        // hàm concat (nối các mảng lai với nhau)
+        const testConcat1 = [1, 2, 3, 4]
+        testConcat2 = [1, 2, 3, 4]
+        console.log(testConcat1.concat(testConcat2))
+
+        testConcat = [1, 2, 3, 4].concat([5, 6], [7, 8])
+        console.log(testConcat)
+
+        // hàm slice (trích xuất phần tử trong mảng)
+        testSlice = [1, 2, 3, 4].slice(1, 3)
+        console.log(testSlice)
+
+        // hàm splice (thêm , xóa , thay thế phần tử trong mảng)
+        testSplice = [1, 2, 3, 4].splice()
+
+    </script>
+</body>
+
+</html>
