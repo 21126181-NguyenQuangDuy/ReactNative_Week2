@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+</head>
+<body>
+    <script>
+        // hàm reduce (cộng với giá trị tích lũy là acc, khởi đầu là 2, cộng tổng lại là 12)
+        testReduce = [1, 2, 3, 4].reduce((acc, num) => acc + num, 2)
+        console.log(testReduce)
+        // rewrite
+        Array.prototype.reducefn = function (callback, initialValue) {
+            let accumulator = initialValue !== undefined ? initialValue : this[0]; //nếu acc có giá trị thì lấy giá trị đó nếu không thì giá trị vị trí 0
+            let startIndex = initialValue !== undefined ? 0 : 1; //nếu acc không có giá trị thì bắt đầu từ vị trí 0, nếu có thì acc là vị trí 0 và bắt dầu tieps theo từ vị trí 1 
+
+            for (let i = startIndex; i < this.length; i++) {
+                if (i in this) {
+                    accumulator = callback(accumulator, this[i], i, this); // gán giá trị vào lại acc
+                }
+            }
+            return accumulator;
+        };
+        // Sử dụng
+        var numbers = [1, 2, 3, 4];
+        var sum = numbers.reducefn(function (acc, element) {
+            return acc + element; // Tính tổng
+        }, 2);
+        console.log(sum); // 15
+    </script>
+</body>
+</html>
