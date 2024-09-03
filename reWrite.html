@@ -32,26 +32,6 @@
         });
         console.log(b);
 
-        // hàm every (Kiểm tra xem tất cả các phần tử của mảng có thỏa mãn điều kiện hay không.)
-        testEvery = [1, 2, 3, 4].every(num => num > 3)
-        console.log(testEvery)
-        // rewrite every
-        Array.prototype.everyfn = function (callback) {
-            for (let i = 0; i < this.length; i++) {
-                if (i in this && !callback(this[i], i, this)) {
-                    return false;
-                }
-            }
-            return true;
-        };
-        // Sử dụng
-        var allPositive = numbers.everyfn(function (element) {
-            return element > 0; // Kiểm tra tất cả đều dương
-        });
-        console.log(allPositive); // true
-
-
-
         // hàm find (tìm và trả về phần tử dầu tiên thỏa mãn điều kiện )
         testFind = [1, 2, 3, 4].find(num => num > 1)
         console.log(testFind)
